@@ -1,0 +1,183 @@
+﻿<Page x:Class="OASIS_App.MVVM.View.UserProfile"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="880"
+      Title="UserProfilePage" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="130"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                 Grid.ColumnSpan="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border CornerRadius="15">
+                        <Border.Background>
+                            <ImageBrush ImageSource="/OASIS App;component/Images/beard.png"
+                                        Stretch="Uniform"/>
+                        </Border.Background>
+                    </Border>
+
+                    <Border Grid.Column="1"
+                            CornerRadius="15">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Row="0"
+                                        Orientation="Horizontal"
+                                        VerticalAlignment="Center"
+                                        Margin="0,10">
+
+                                <TextBlock Text="{Binding Login}"
+                                           Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                           FontSize="35"
+                                           FontFamily="/OASIS App;component/Fonts/#Comfortaa"
+                                           Foreground="Black"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Vertical"
+                                        VerticalAlignment="Center"
+                                        Grid.Row="1">
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Center">
+
+                                    <materialDesign:PackIcon Kind="Email"
+                                                             VerticalAlignment="Center"
+                                                             Height="24"
+                                                             Width="24"/>
+
+                                    <TextBlock Text="{Binding Email}"
+                                               Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                               FontSize="18"
+                                               FontFamily="/OASIS App;component/Fonts/#Comfortaa"
+                                               Foreground="Black"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal"
+                                            VerticalAlignment="Center"
+                                            Margin="0,10,0,0">
+
+                                    <materialDesign:PackIcon Kind="Phone"
+                                                             VerticalAlignment="Center"
+                                                             Height="24"
+                                                             Width="24"/>
+
+                                    <TextBlock Text="{Binding Path=MobilePhone}"
+                                               Style="{StaticResource MaterialDesignSubtitle1TextBlock}" 
+                                               FontSize="18"
+                                               FontFamily="/OASIS App;component/Fonts/#Comfortaa"
+                                               Foreground="Black"/>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <GroupBox Grid.Column="1"
+                                       Grid.RowSpan="2"
+                                      Padding="0"
+                                      Margin="0"
+                                      BorderBrush="LightGray">
+                                <GroupBox.Header>
+                                    <Border Height="30">
+                                        <Border.Background>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="#FF43E6FF" Offset="1"/>
+                                                <GradientStop Color="#FF0CBDDA"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        
+                                        <TextBlock Text="Информация о заказанных турах"
+                                                   Foreground="White"
+                                                   FontSize="18"
+                                                   Margin="5,0"
+                                                   VerticalAlignment="Center" FontFamily="/OASIS App;component/Fonts/#Comfortaa"/>
+                                    </Border>
+                                </GroupBox.Header>
+
+                                <StackPanel Orientation="Vertical">
+
+                                    <TextBlock Text="{Binding StringFormat=Заказано туров: {0}, Path=BookedToursAmount}"
+                                               x:Name="BookedToursAmount"
+                                               FontSize="16"
+                                               Margin="5,0"/>
+
+                                    <Separator Opacity="0.3"
+                                               Background="LightGray"
+                                               Margin="10,0"/>
+                                    
+                                    <TextBlock Text="{Binding StringFormat=Общая стоимость: {0}, Path=BookedToursTotalPrice}"
+                                               x:Name="BookedToursTotalPrice"
+                                               FontSize="16"
+                                               Margin="5,0"/>
+
+                                    <Separator Opacity="0.3"
+                                               Background="LightGray"
+                                               Margin="10,0"/>
+                                    
+                                    <TextBlock Text="Сортировка"
+                                           FontSize="16"
+                                           TextAlignment="Center"
+                                           Margin="0,0,0,0"/>
+
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="3,0">
+                                        <ComboBox x:Name="FilledComboBox"
+                                              materialDesign:HintAssist.Hint="Выберите сортировку ..."
+                                              FontSize="14"
+                                              VerticalAlignment="Center"
+                                              SelectionChanged="FilledComboBox_SelectionChanged" Margin="0,2" Width="242">
+                                            <ComboBox.Background>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="White" Offset="1"/>
+                                                    <GradientStop Color="#FFF0F0F0"/>
+                                                </LinearGradientBrush>
+                                            </ComboBox.Background>
+                                            <ComboBoxItem Content="Сначала более дешёвые"/>
+                                            <ComboBoxItem Content="Сначала более дорогие"/>
+                                            <ComboBoxItem Content="По алфавиту"/>
+                                            <ComboBoxItem Content="По дате (возр)"/>
+                                            <ComboBoxItem Content="По дате (убыв)"/>
+                                        </ComboBox>
+                                        
+                                        <Button x:Name="ClearFilledComboBoxButton"
+                                                Content="Сбросить"
+                                                Width="95"
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                VerticalAlignment="Center"
+                                                Click="ClearFilledComboBoxButton_Click"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </GroupBox>
+                        </Grid>
+                    </Border>
+                </Grid>
+
+            </materialDesign:Card>
+
+            <ScrollViewer Grid.Row="1"
+                          Grid.ColumnSpan="2">
+                <WrapPanel x:Name="BookedToursWrapPanel" 
+                           Orientation="Vertical"
+                           Margin="0,0,0,10"/>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

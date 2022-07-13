@@ -1,0 +1,155 @@
+﻿<Page x:Class="OASIS_App.MVVM.View.MakeTour"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
+      Title="MakeTour"
+      Loaded="Page_Loaded">
+
+    <ScrollViewer VerticalScrollBarVisibility="Visible">
+        <StackPanel Orientation="Vertical">
+            <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                                 Padding="15"
+                                 Margin="5">
+
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Изображение"
+                               HorizontalAlignment="Center"
+                               FontWeight="Light"
+                               FontSize="21" 
+                               Margin="5"
+                               FontFamily="/OASIS App;component/Fonts/#Comfortaa"/>
+
+                    <Border x:Name="Bord"
+                            BorderThickness="3"
+                            BorderBrush='LightGray'
+                            CornerRadius="5"
+                            Height="272"
+                            Width="545"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                        <Image x:Name="TourImage"
+                               Stretch="Fill"
+                               Source="{Binding Path=Image.Path, Mode=TwoWay}"/>
+                    </Border>
+
+                    <Button x:Name="BrowseButton" 
+                            Content="Выбрать" 
+                            Width="100"
+                            VerticalAlignment="Center"
+                            Click="BrowseButton_Click"
+                            Margin="5" 
+                            FontFamily="/OASIS App;component/Fonts/#Comfortaa"/>
+                </StackPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                 Padding="15"
+                                 Margin="5,0,5,5">
+
+                <StackPanel Orientation="Vertical"
+                            Margin="5">
+                    <TextBox x:Name="Name"
+                             FontSize="16"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Название тура" 
+                             FontFamily="/OASIS App;component/Fonts/#Comfortaa"
+                             Text="{Binding Path=Name, Mode=TwoWay}"/>
+
+                    <TextBox x:Name="Duration"
+                             FontSize="16"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Длительность (дней)" 
+                             FontFamily="/OASIS App;component/Fonts/#Comfortaa"
+                             Text="{Binding Path=Duration, Mode=TwoWay}"/>
+
+                    <TextBox x:Name="PriceAdult"
+                             FontSize="16"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Стоимость взрослый (руб)" 
+                             FontFamily="/OASIS App;component/Fonts/#Comfortaa"
+                             Text="{Binding Path=PriceAdult, Mode=TwoWay}"/>
+
+                    <TextBox x:Name="PriceChild"
+                             FontSize="16"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Стоимость ребёнок* (руб)" 
+                             FontFamily="/OASIS App;component/Fonts/#Comfortaa"
+                             Text="{Binding Path=PriceChild, Mode=TwoWay}"/>
+
+                    <DatePicker x:Name="AvailableDate"
+                                FontSize="16"
+                                materialDesign:HintAssist.Hint="Начало тура"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" 
+                                FontFamily="/OASIS App;component/Fonts/#Comfortaa"
+                                SelectedDateFormat="Short"
+                                DisplayDateStart="{x:Static sys:DateTime.Now}"
+                                SelectedDate="{Binding Path=AvailableDate, Mode=TwoWay}"/>
+                </StackPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                 Padding="15"
+                                 Margin="5,0,5,5">
+
+                <StackPanel Orientation="Vertical"
+                        Grid.Column="1"
+                        VerticalAlignment="Top">
+
+                    <TextBox x:Name="Info"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             BorderBrush="LightGray"
+                             BorderThickness="2"
+                             VerticalAlignment="Top"
+                             Height="165"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             FontSize="16"
+                             VerticalScrollBarVisibility="Auto"
+                             Margin="5,10,5,5"
+                             materialDesign:HintAssist.Hint="Информация о туре"
+                             Text="{Binding Path=Info, Mode=TwoWay}"/>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,10,0,0">
+
+                        <Button x:Name="SaveButton" 
+                                Content="Сохранить"
+                                Width="116"
+                                VerticalAlignment="Center"
+                                Margin="0,0,25,0" 
+                                FontFamily="/OASIS App;component/Fonts/#Comfortaa"
+                                Click="SaveButton_Click"/>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="ShowButton"
+                                Content="ID"
+                                Width="100"
+                                VerticalAlignment="Center"
+                                Margin="25,0,0,0" 
+                                FontFamily="/OASIS App;component/Fonts/#Comfortaa"
+                                Click="ShowButton_Click"/>
+
+                            <TextBox x:Name="Id"
+                                     Width="100"
+                                     materialDesign:HintAssist.HelperTextFontSize="13"
+                                     materialDesign:HintAssist.HelperText="ID"/>
+
+                            <Button x:Name="UpdateTour"
+                                    Width="100"
+                                    Content="Обновить"
+                                    Click="UpdateTour_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:Card>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

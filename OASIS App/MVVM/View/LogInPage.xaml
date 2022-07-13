@@ -1,0 +1,143 @@
+﻿<Page x:Class="OASIS_App.MVVM.View.LogInPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:model="clr-namespace:OASIS_App.MVVM.Model" 
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="LogInPage"
+      x:Name="LogPage">
+
+    <Grid>
+        <Border Grid.Row="1"
+                Grid.Column="1"
+                Background="#FFECE0E0"
+                CornerRadius="15"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Height="360"
+                Width="550">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Войти в аккаунт"
+                       FontSize="25"
+                       Foreground="Black"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top"
+                       FontFamily="Bookman Old Style"/>
+
+                <Image Margin="245,45,10,22"
+                       Source="/OASIS App;component/Oasis-removebg-preview.png" 
+                       Stretch="Fill" 
+                       Width="295" 
+                       Height="296"
+                       RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2"/>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="1"
+                                VerticalAlignment="Bottom"
+                                Margin="0,0,44,50">
+
+                        <Label Content="OASIS" 
+                           HorizontalAlignment="Center"
+                           FontSize="30"
+                           FontFamily="/OASIS App;component/Fonts/#Nautilus Pompilius"
+                           Background="Transparent">
+                            <Label.Foreground>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFF9C464" Offset="0.801"/>
+                                    <GradientStop Color="#FF264D78"/>
+                                    <GradientStop Color="#FFFF694E" Offset="0.525"/>
+                                    <GradientStop Color="#FFC5C5C5" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Label.Foreground>
+                        </Label>
+
+                        <TextBlock HorizontalAlignment="Center" 
+                                   TextWrapping="Wrap">
+                            Нет аккаунта? <Hyperlink NavigateUri="RegPage.xaml">Регистрация</Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <Grid Grid.Column="0"
+                          VerticalAlignment="Center"
+                          Margin="0,0,0,40">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Account"
+                                                     Margin="3,10,0,0"
+                                                     VerticalAlignment="Center"/>
+                            <TextBox x:Name="Login"
+                                     Grid.Row="0"
+                                     VerticalAlignment="Center"
+                                     HorizontalAlignment="Left"
+                                     Margin="10,0,10,10"
+                                     Width="230"
+                                     Text="{Binding Path=Login, Mode=OneWayToSource}"
+                                     FontSize="16"
+                                     materialDesign:HintAssist.Hint="Логин"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" Height="45"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Lock"
+                                                     Margin="3,22,0,9"
+                                                     VerticalAlignment="Center"/>
+
+                            <PasswordBox x:Name="PasswordBox"
+                                         VerticalAlignment="Center"
+                                         HorizontalAlignment="Left"
+                                         Margin="10,0,10,10"
+                                         Width="230"
+                                         FontSize="16"
+                                         materialDesign:HintAssist.Hint="Пароль"
+                                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
+                                         Height="45" />
+                        </StackPanel>
+
+                        <Button x:Name="LogButton"
+                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                Content="Войти"
+                                Grid.Row="2"
+                                Width="230"
+                                HorizontalAlignment="Left"
+                                Margin="28,0,0,0" 
+                                Click="LogButton_Click"
+                                BorderThickness="0">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF5D4BD8" Offset="1"/>
+                                    <GradientStop Color="#FF7666EE"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+
+                    </Grid>
+                    
+                    <materialDesign:Snackbar x:Name="SnackBar"
+                                             Grid.Row="2"
+                                             Grid.ColumnSpan="2"
+                                             Width="Auto"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>
