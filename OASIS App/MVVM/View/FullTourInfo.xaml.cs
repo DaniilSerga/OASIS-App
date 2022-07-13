@@ -24,6 +24,7 @@ namespace OASIS_App.MVVM.View
 
         private Tour _currentTour;
         
+        // class constructor
         public FullTourInfo(Tour tour)
         {
             InitializeComponent();
