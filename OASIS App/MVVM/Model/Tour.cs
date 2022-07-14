@@ -135,16 +135,17 @@ namespace OASIS_App.MVVM.Model
                 {
                     while (dataReader.Read())
                     {
-                        Tour tour = new Tour();
-
-                        tour.Id = dataReader.GetInt32(0);
-                        tour.Name = dataReader.GetString(1);
-                        tour.PriceAdult = dataReader.GetDecimal(2);
-                        tour.PriceChild = dataReader.GetDecimal(3);
-                        tour.Duration = dataReader.GetInt32(4);
-                        tour.AvailableDate = dataReader.GetDateTime(5);
-                        tour.Info = dataReader.GetString(6);
-                        tour.Image = new Image(dataReader.GetString(7));
+                        Tour tour = new Tour
+                        {
+                            Id = dataReader.GetInt32(0),
+                            Name = dataReader.GetString(1),
+                            PriceAdult = dataReader.GetDecimal(2),
+                            PriceChild = dataReader.GetDecimal(3),
+                            Duration = dataReader.GetInt32(4),
+                            AvailableDate = dataReader.GetDateTime(5),
+                            Info = dataReader.GetString(6),
+                            Image = new Image(dataReader.GetString(7))
+                        };
 
                         tours.Add(tour);
                     }
@@ -230,6 +231,17 @@ namespace OASIS_App.MVVM.Model
             }
 
             return mostOrderedTour;
+        }
+
+        // TODO Implement this method
+        public static void RefreshDBPaths()
+        {
+            if (_sqlConnection.State is ConnectionState.Closed)
+            {
+                _sqlConnection.Open();
+            }
+
+            SqlCommand sqlCommand = new SqlCommand("UPDATE ", _sqlConnection);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
