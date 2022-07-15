@@ -236,10 +236,10 @@ namespace OASIS_App.MVVM.Model
         // TODO Implement this method
         public static List<string> RefreshDBPaths()
         {
-            //if (_sqlConnection.State is ConnectionState.Closed)
-            //{
-            //    _sqlConnection.Open();
-            //}
+            if (_sqlConnection.State is ConnectionState.Closed)
+            {
+                _sqlConnection.Open();
+            }
 
             List<string> paths = new List<string>();
 
