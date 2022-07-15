@@ -234,14 +234,39 @@ namespace OASIS_App.MVVM.Model
         }
 
         // TODO Implement this method
-        public static void RefreshDBPaths()
+        public static List<string> RefreshDBPaths()
         {
-            if (_sqlConnection.State is ConnectionState.Closed)
+            //if (_sqlConnection.State is ConnectionState.Closed)
+            //{
+            //    _sqlConnection.Open();
+            //}
+
+            List<string> paths = new List<string>();
+
+            try
             {
-                _sqlConnection.Open();
+                // Gets All pictures names
+                List<string> names = new List<string>();
+                names.AddRange(Directory.GetFiles("TourImages\\"));
+
+                // Gets Full Paths of tour pictures on a computer
+                for (int i = 0; i < names.Count; i++)
+                {
+                    paths.Add(Path.GetFullPath("TourImages\\" + names[i].Substring(names[i].LastIndexOf('\\') + 1)));
+                }
+
+                // Получи все пути из бд, выдели подстроку с именем файла, сравни с иеющимися путями, сходство = замена в бд
+
+                //SqlCommand sqlCommand = new SqlCommand("UPDATE Tours SET ImagePath=@ImagePath WHERE ", _sqlConnection);
+                //Path.Combine(Directory.GetCurrentDirectory(), "TourImages\\", _tour.Image.Name);
+                //imagePath.Substring(imagePath.LastIndexOf('\\') + 1);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
-            SqlCommand sqlCommand = new SqlCommand("UPDATE ", _sqlConnection);
+            return paths;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
